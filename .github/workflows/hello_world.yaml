@@ -6,25 +6,24 @@ on:
       - main
 
 jobs:
-  first-hello-world-job:
+  hello-world-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Echo Hello World
+      # Step 1: Hello World
+      - name: Hello World
         run: echo "Hello World GA Testing"
 
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install dependencies
+      # Step 2: Run pytest (includes all setup in a single step)
+      - name: Run Tests
         run: |
+          # Checkout code
+          git clone $GITHUB_REPOSITORY repo
+          cd repo
+
+          # Setup Python
           python -m pip install --upgrade pip
           pip install pytest
 
-      - name: Run Tests
-        run: pytest
+          # Run tests
+          pytest
