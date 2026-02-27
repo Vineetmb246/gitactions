@@ -6,25 +6,22 @@ on:
       - main
 
 jobs:
-  hello-world-job:
+  first-hello-world-job:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Hello World
-      - name: Hello World
-        run: echo "Hello World GA Testing"
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      # Step 2: Run Tests (includes checkout + pytest setup)
-      - name: Run Tests
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
         run: |
-          echo "Setting up environment..."
-
-          # Checkout is automatic in the workflow workspace
-          # Current directory already has your repo
-
-          # Setup Python
           python -m pip install --upgrade pip
           pip install pytest
 
-          # Run tests
-          pytest
+      - name: Run Tests
+        run: pytest
