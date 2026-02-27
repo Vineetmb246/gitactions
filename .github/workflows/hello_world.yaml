@@ -14,12 +14,13 @@ jobs:
       - name: Hello World
         run: echo "Hello World GA Testing"
 
-      # Step 2: Run pytest (includes all setup in a single step)
+      # Step 2: Run Tests (includes checkout + pytest setup)
       - name: Run Tests
         run: |
-          # Checkout code
-          git clone $GITHUB_REPOSITORY repo
-          cd repo
+          echo "Setting up environment..."
+
+          # Checkout is automatic in the workflow workspace
+          # Current directory already has your repo
 
           # Setup Python
           python -m pip install --upgrade pip
