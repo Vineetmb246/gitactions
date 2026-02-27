@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Echo Hello World
+        run: echo "Hello World GA Testing"
+
       - name: Checkout Code
         uses: actions/checkout@v3
 
